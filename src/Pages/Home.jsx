@@ -1,10 +1,15 @@
-import React from 'react';
+
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
-    <div className="page" style={{ padding: '20px' }}>
-      <h1>Welcome to Home Page</h1>
-      <p>This is the home page of our React application.</p>
+    <div className="content-card">
+      <h1>Welcome to ShopEase</h1>
+      <p>Manage and track all your e-commerce orders in one place.</p>
+
+      <Link to="/orders" className="primary-btn">
+        View Orders
+      </Link>
     </div>
   );
 }

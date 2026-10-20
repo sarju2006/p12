@@ -3,32 +3,61 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Link
+  NavLink
 } from 'react-router-dom';
 
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
+import Home from './Pages/Home';
+import Orders from './Pages/Orders';
+import CurrentOrders from './Pages/CurrentOrder';
+import OrderHistory from './Pages/OrderHistory';
+import CancelledOrders from './Pages/CancelledOrders';
+import NotFound from './Pages/NotFound';
+
 
 function App() {
+  
   return (
     <BrowserRouter>
       <div className="app">
-        <nav className="navbar">
-          <h2>Practical 11</h2>
+        <header className="navbar">
+          <NavLink to="/" className="brand">
+            ShopEase
+          </NavLink>
 
-          <div className="nav-links">
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-            <Link to="/contact">Contact</Link>
-          </div>
-        </nav>
+          <nav className="main-nav">
+            <NavLink to="/" end>Home</NavLink>
+            <NavLink to="/orders">Orders</NavLink>
+          </nav>
+        </header>
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <main className="container">
+          <Routes>
+            <Route path="/" element={<Home />} />
+
+            <Route path="/orders" element={<Orders />}>
+              <Route
+                index
+                element={<CurrentOrders />}
+              />
+
+              <Route
+                path="history"
+                element={<OrderHistory />}
+              />
+
+              <Route
+                path="cancelled"
+                element={<CancelledOrders />}
+              />
+            </Route>
+
+            <Route
+              path="*"
+              element={<NotFound />}
+            />
+          </Routes>
+        </main>
+
       </div>
     </BrowserRouter>
   );
